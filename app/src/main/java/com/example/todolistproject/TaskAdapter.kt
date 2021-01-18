@@ -1,10 +1,15 @@
 package com.example.todolistproject
 
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.single_task.view.*
 
@@ -40,7 +45,11 @@ class TaskAdapter(val tasks: ArrayList<Task>, val context: Context) : RecyclerVi
             notifyDataSetChanged()
         }
         holder?.taskView.setOnClickListener{
-            Toast.makeText(context, "$position", Toast.LENGTH_SHORT).show()
+            val intent = Intent(context, FullTaskActivity::class.java).apply {
+            putExtra("task", tasks[position])
+            }
+
+            context.startActivity(intent)
         }
     }
 
