@@ -9,16 +9,27 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     val tasks: ArrayList<Task> = ArrayList()
+    private var db: AppDatabase? = null
+    private var taskDao: TaskDao? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        db = AppDatabase.getAppDataBase(context = this)
+        taskDao = db?.taskDao()
+
+        val dbTasks: List<Task>? = taskDao?.getTasks()
+
+        if (dbTasks != null) {
+            for(task in dbTasks){
+                addTasks(task)
+            }
+        }
+
         if(intent.extras != null) {
             val added_task: Task? = intent.extras?.get("task") as Task
             addTasks(added_task)
-        }else{
-            addTasks()
         }
 
         rv_task_list.layoutManager = LinearLayoutManager( this )
@@ -35,11 +46,11 @@ class MainActivity : AppCompatActivity() {
         if (added_task != null) {
             tasks.add(added_task)
         }
-        tasks.add(Task("Create tasks app", 0, "Test out your kotlin skills by creating a tasks app"))
-        tasks.add(Task("Test App", 1, "Test out the app you made"))
-        tasks.add(Task("Connect App to DB", 2, "Further develop the tasks app to connect it to a DB"))
-        tasks.add(Task("Change Theme and Style", 1, "Make the app beautiful!"))
-
+        /*tasks.add(Task(name = "Create tasks app", priority = 0, desc = "Test out your kotlin skills by creating a tasks app"))
+        tasks.add(Task(name = "Test App", priority = 1, desc = "Test out the app you made"))
+        tasks.add(Task(name = "Connect App to DB", priority = 2, desc = "Further develop the tasks app to connect it to a DB"))
+        tasks.add(Task(name = "Change Theme and Style", priority = 1, desc = "Make the app beautiful!"))
+        */
     }
 
 }

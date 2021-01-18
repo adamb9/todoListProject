@@ -10,6 +10,9 @@ import kotlinx.android.synthetic.main.single_task.view.*
 
 class TaskAdapter(val tasks: ArrayList<Task>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
+    private var db: AppDatabase? = null
+    private var taskDao: TaskDao? = null
+
     // Gets the number of tasks in the list
     override fun getItemCount(): Int {
         return tasks.size
@@ -22,13 +25,17 @@ class TaskAdapter(val tasks: ArrayList<Task>, val context: Context) : RecyclerVi
 
     // Binds each task in the ArrayList to a view
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        db = AppDatabase.getAppDataBase(context = context)
+        taskDao = db?.taskDao()
+
         holder?.tvTaskName?.text = tasks.get(position).name
         when(tasks.get(position).priority) {
-            0 -> holder?.ivTaskColor?.setImageResource(R.drawable.redcircle_foreground)
+            2 -> holder?.ivTaskColor?.setImageResource(R.drawable.redcircle_foreground)
             1 -> holder?.ivTaskColor?.setImageResource(R.drawable.orangecircle_foreground)
-            2 -> holder?.ivTaskColor?.setImageResource(R.drawable.greencircle_foreground)
+            0 -> holder?.ivTaskColor?.setImageResource(R.drawable.greencircle_foreground)
         }
         holder?.btnRemoveTask.setOnClickListener{
+            taskDao?.deleteTask(tasks[position])
             tasks.removeAt(position)
             notifyDataSetChanged()
         }
