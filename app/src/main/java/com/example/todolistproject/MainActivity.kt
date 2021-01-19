@@ -3,6 +3,9 @@ package com.example.todolistproject
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -19,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         db = AppDatabase.getAppDataBase(context = this)
         taskDao = db?.taskDao()
 
-        val dbTasks: List<Task>? = taskDao?.getTasks()
+        val dbTasks: List<Task>? = taskDao?.getUncompletedTasks()
 
         if (dbTasks != null) {
             for(task in dbTasks){
@@ -28,8 +31,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         if(intent.extras != null) {
-            val added_task: Task? = intent.extras?.get("task") as Task
-            addTasks(added_task)
+            val addedTask: Task? = intent.extras?.get("task") as Task
+            addTasks(addedTask)
         }
 
         rv_task_list.layoutManager = LinearLayoutManager( this )
@@ -42,15 +45,32 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun addTasks(added_task: Task? = null){
-        if (added_task != null) {
-            tasks.add(added_task)
+    fun addTasks(addedTask: Task? = null){
+        if (addedTask != null) {
+            tasks.add(addedTask)
         }
-        /*tasks.add(Task(name = "Create tasks app", priority = 0, desc = "Test out your kotlin skills by creating a tasks app"))
-        tasks.add(Task(name = "Test App", priority = 1, desc = "Test out the app you made"))
-        tasks.add(Task(name = "Connect App to DB", priority = 2, desc = "Further develop the tasks app to connect it to a DB"))
-        tasks.add(Task(name = "Change Theme and Style", priority = 1, desc = "Make the app beautiful!"))
-        */
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here.
+        val id = item.getItemId()
+
+        if (id == R.id.btn_filter) {
+            val intent = Intent(this, FilterActivity::class.java)
+            startActivity(intent)
+            return true
+        }
+
+        return super.onOptionsItemSelected(item)
+
+    }
+
 
 }

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="116dp"
         android:layout_marginLeft="116dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="115dp"
         android:layout_marginRight="115dp"
         android:text="Add New Task"
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="102dp"
         android:layout_marginLeft="102dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="99dp"
         android:layout_marginRight="99dp"
         android:ems="10"
@@ -43,7 +43,7 @@
         android:id="@+id/sb_priority"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="54dp"
         android:max="2"
         app:layout_constraintEnd_toEndOf="@+id/et_new_taskname"
         app:layout_constraintHorizontal_bias="0.0"
@@ -97,7 +97,7 @@
         android:id="@+id/et_new_taskdesc"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:gravity="start|top"
         android:hint="Task Description"
@@ -108,13 +108,27 @@
         app:layout_constraintStart_toStartOf="@+id/et_new_taskname"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
+    <TextView
+        android:id="@+id/tv_due_date"
+        android:layout_width="145dp"
+        android:layout_height="39dp"
+        android:clickable="true"
+        android:gravity="center_horizontal"
+        android:hint="dd/mm/yy"
+        android:inputType="date"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
     <Button
         android:id="@+id/btn_add_task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="138dp"
         android:text="Add Task"
         app:layout_constraintEnd_toEndOf="@+id/et_new_taskdesc"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="@+id/et_new_taskdesc"
         app:layout_constraintTop_toBottomOf="@+id/et_new_taskdesc" />
 
@@ -149,5 +163,18 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Due Date"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_new_taskdesc" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

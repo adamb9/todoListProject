@@ -32,7 +32,7 @@
                     android:text="TextView"
                     android:textSize="22sp"
                     app:layout_constraintBottom_toBottomOf="@+id/iv_taskcolor"
-                    app:layout_constraintEnd_toStartOf="@+id/btn_removetask"
+                    app:layout_constraintEnd_toStartOf="@+id/btn_completetask"
                     app:layout_constraintStart_toEndOf="@+id/iv_taskcolor"
                     app:layout_constraintTop_toTopOf="@+id/iv_taskcolor" />
 
@@ -50,15 +50,16 @@
                     tools:srcCompat="@drawable/greencircle_foreground" />
 
                 <ImageButton
-                    android:id="@+id/btn_removetask"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_completetask"
+                    android:layout_width="70sp"
+                    android:layout_height="70sp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
+                    android:background="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@android:drawable/ic_menu_delete" />
+                    app:srcCompat="@drawable/greytick_foreground" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

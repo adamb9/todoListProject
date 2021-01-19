@@ -1,15 +1,11 @@
 package com.example.todolistproject
 
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.single_task.view.*
 
@@ -39,8 +35,10 @@ class TaskAdapter(val tasks: ArrayList<Task>, val context: Context) : RecyclerVi
             1 -> holder?.ivTaskColor?.setImageResource(R.drawable.orangecircle_foreground)
             0 -> holder?.ivTaskColor?.setImageResource(R.drawable.greencircle_foreground)
         }
-        holder?.btnRemoveTask.setOnClickListener{
-            taskDao?.deleteTask(tasks[position])
+        holder?.btnCompleteTask.setOnClickListener{
+            var selectedTask = tasks[position]
+            selectedTask.isCompleted = true
+            taskDao?.updateTask(selectedTask)
             tasks.removeAt(position)
             notifyDataSetChanged()
         }
@@ -59,6 +57,6 @@ class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     // Holds the fields that we will add each task to
     val tvTaskName = view.tv_taskname
     val ivTaskColor = view.iv_taskcolor
-    val btnRemoveTask = view.btn_removetask
+    val btnCompleteTask = view.btn_completetask
     val taskView = view
 }
