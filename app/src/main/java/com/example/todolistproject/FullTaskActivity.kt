@@ -59,6 +59,13 @@ class FullTaskActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        btn_edit_task.setOnClickListener(){
+            val intent = Intent(this, EditTaskActivity::class.java).apply {
+                putExtra("task", selectedTask)
+            }
+            startActivity(intent)
+        }
+
         supportActionBar?.hide()
 
 
