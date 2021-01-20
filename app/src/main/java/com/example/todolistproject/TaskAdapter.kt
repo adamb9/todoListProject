@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.single_task.view.*
 
-class TaskAdapter(val tasks: ArrayList<Task>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+class TaskAdapter(var tasks: ArrayList<Task>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
 
     private var db: AppDatabase? = null
     private var taskDao: TaskDao? = null
@@ -49,6 +49,15 @@ class TaskAdapter(val tasks: ArrayList<Task>, val context: Context) : RecyclerVi
 
             context.startActivity(intent)
         }
+    }
+
+    fun update(newList: ArrayList<Task>){
+        /*for(task in newList){
+            println(task.name)
+        }*/
+        tasks = newList
+        notifyDataSetChanged()
+        //println("herherhehrherh")
     }
 
 }
